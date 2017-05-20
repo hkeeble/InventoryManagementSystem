@@ -7,9 +7,9 @@ namespace Tests
     [TestFixture]
     public class InventoryItem_Test
     {
-        /// <summary>
-        /// Test mock class.
-        /// </summary>
+        static readonly double TEST_VALUE = 100.0;
+        static readonly DateTime TEST_RECEIVED_DATE = DateTime.Today;
+
         private class InventoryItem_Mock : InventoryItem
         {
             public InventoryItem_Mock(Double value, DateTime receivedDate)
@@ -20,9 +20,6 @@ namespace Tests
         [Test]
         public void TestConstruction()
         {
-            const double TEST_VALUE = 100.0;
-            DateTime TEST_RECEIVED_DATE = DateTime.Today;
-
             InventoryItem_Mock inventoryItem = new InventoryItem_Mock(TEST_VALUE, TEST_RECEIVED_DATE);
 
             Assert.AreEqual(inventoryItem.Value, 100.0, "Inventory Item Value not set correctly.");

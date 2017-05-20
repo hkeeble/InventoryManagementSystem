@@ -13,22 +13,6 @@ namespace InventorySystem
         public int LifeInDays { get; private set; }
 
         /// <summary>
-        /// The expiration date of this perishable.
-        /// </summary>
-        public DateTime ExpirationDate
-        {
-            get
-            {
-                if(ExpirationDate == null)
-                {
-                    ExpirationDate = ReceivedDate.AddDays(LifeInDays);
-                }
-                return ExpirationDate;
-            }
-            private set { ExpirationDate = value; }
-        }
-        
-        /// <summary>
         /// Creates a new Perishable Inventory Item.
         /// </summary>
         /// <param name="value">The currency value of this perishable inventory item.</param>
@@ -40,13 +24,23 @@ namespace InventorySystem
             LifeInDays = lifeInDays;
         }
 
+
         /// <summary>
-        /// Whether or not this perishable has expired.
+        /// Get the expiration date for this perishable item.
         /// </summary>
-        /// <returns>Returns true if the perishable has expired.</returns>
+        /// <returns>The date that this perishable item expires.</returns>
+        public DateTime GetExpirationDate()
+        {
+            return ReceivedDate.AddDays(LifeInDays);
+        }
+
+        /// <summary>
+        /// Check if this perishable item has expired.
+        /// </summary>
+        /// <returns>Returns true if the item has expired.</returns>
         public bool HasExpired()
         {
-            return (ExpirationDate.CompareTo(DateTime.Now) < 0);
+            return (GetExpirationDate().CompareTo(DateTime.Now) < 0);
         }
     }
 }
